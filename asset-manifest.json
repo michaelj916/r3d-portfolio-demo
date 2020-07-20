@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/r3d-portfolio-demo/static/css/main.dadb10c3.chunk.css",
+    "main.js": "/r3d-portfolio-demo/static/js/main.63e54d72.chunk.js",
+    "main.js.map": "/r3d-portfolio-demo/static/js/main.63e54d72.chunk.js.map",
+    "runtime-main.js": "/r3d-portfolio-demo/static/js/runtime-main.76cd2237.js",
+    "runtime-main.js.map": "/r3d-portfolio-demo/static/js/runtime-main.76cd2237.js.map",
+    "static/js/2.0df0aad2.chunk.js": "/r3d-portfolio-demo/static/js/2.0df0aad2.chunk.js",
+    "static/js/2.0df0aad2.chunk.js.map": "/r3d-portfolio-demo/static/js/2.0df0aad2.chunk.js.map",
+    "index.html": "/r3d-portfolio-demo/index.html",
+    "precache-manifest.117beb5260c60f30751360f793d642a6.js": "/r3d-portfolio-demo/precache-manifest.117beb5260c60f30751360f793d642a6.js",
+    "service-worker.js": "/r3d-portfolio-demo/service-worker.js",
+    "static/css/main.dadb10c3.chunk.css.map": "/r3d-portfolio-demo/static/css/main.dadb10c3.chunk.css.map",
+    "static/media/styles.css": "/r3d-portfolio-demo/static/media/noise.b6bf7337.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.76cd2237.js",
+    "static/js/2.0df0aad2.chunk.js",
+    "static/css/main.dadb10c3.chunk.css",
+    "static/js/main.63e54d72.chunk.js"
+  ]
+}
