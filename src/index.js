@@ -16,13 +16,30 @@ function Startup() {
   return <Plane ref={ref} color="#0e0e0f" position={[0, 0, 200]} scale={[100, 100, 1]} />
 }
 
+function Cross() {
+  const ref = useRef()
+  const { viewportHeight } = useBlock()
+  useFrame(() => {
+    const curTop = state.top.current
+    const curY = ref.current.rotation.z
+    const nextY = (curTop / ((state.pages - 1) * viewportHeight)) * Math.PI
+    ref.current.rotation.z = lerp(curY, nextY, 0.1)
+  })
+  return (
+    <group ref={ref} scale={[2, 2, 2]}>
+      <Plane scale={[1, 0.2, 0.2]} color="#e2bfca" />
+      <Plane scale={[0.2, 1, 0.2]} color="#e2bfca" />
+    </group>
+  )
+}
+
 function Paragraph({ image, index, offset, factor, header, aspect, text }) {
   const { contentMaxWidth: w, canvasWidth, margin, mobile } = useBlock()
   const size = aspect < 1 && !mobile ? 0.65 : 1
   const alignRight = (canvasWidth - w * size - margin) / 2
   const pixelWidth = w * state.zoom * size
   const left = !(index % 2)
-  const color = index % 2 ? "#D40749" : "#2FE8C3"
+  const color = index % 2 ? "#b9f2ff" : "#c9f0ff"
   return (
     <Block factor={factor} offset={offset}>
       <group position={[left ? -alignRight : alignRight, 0, 0]}>
@@ -45,43 +62,56 @@ function Paragraph({ image, index, offset, factor, header, aspect, text }) {
   )
 }
 
+
 function Content() {
+
+  // adding the images
   const images = useLoader(
     TextureLoader,
     state.paragraphs.map(({ image }) => image)
   )
+
+  // texture mapping for the images (effects)
   useMemo(() => images.forEach(texture => (texture.minFilter = LinearFilter)), [images])
+
+  // canvas construction
   const { contentMaxWidth: w, canvasWidth, canvasHeight, mobile } = useBlock()
+  
+  // content itself
   return (
     <>
       <Block factor={1} offset={0}>
         <Block factor={1.2}>
-          <Text left size={w * 0.08} position={[-w / 3.2, 0.5, -1]} color="#d40749">
-            MOKSHA
+          <Text left size={w * 0.08} position={[-w / 3.2, 0.5, -1]} color="#b9f2ff">
+            MICHAEL
           </Text>
         </Block>
         <Block factor={1.0}>
-          <Dom position={[-w / 3.2, -w * 0.08 + 0.25, -1]}>It was the year 2076.{mobile ? <br /> : " "}The substance had arrived.</Dom>
+          <Dom position={[-w / 3.2, -w * 0.08 + 0.25, -1]}>an interactive portfolio.{mobile ? <br /> : " "}please scroll down.</Dom>
         </Block>
       </Block>
       <Block factor={1.2} offset={5.7}>
-        <MultilineText top left size={w * 0.15} lineHeight={w / 5} position={[-w / 3.5, 0, -1]} color="#2fe8c3" text={"four\nzero\nzero"} />
+        <MultilineText top left size={w * 0.15} lineHeight={w / 5} position={[-w / 3.5, 0, -1]} color="#b9f2ff" text={"always\nseek\nwisdom"} />
       </Block>
       {state.paragraphs.map((props, index) => (
         <Paragraph key={index} index={index} {...props} image={images[index]} />
       ))}
-      {state.stripes.map(({ offset, color, height }, index) => (
+      {/* 
+        optional stripes component ( adds parallax scrolling effect )
+      {state.stripes.map(({ offset, color, image, height }, index) => (
         <Block key={index} factor={-1.5} offset={offset}>
-          <Plane args={[50, height, 32, 32]} shift={-4} color={color} rotation={[0, 0, Math.PI / 8]} position={[0, 0, -10]} />
+          <Plane image={image} args={[50, height, 32, 32]} shift={-4} color={color} rotation={[0, 0, Math.PI / 8]} position={[0, 0, -10]} />
         </Block>
-      ))}
+      ))} */}
       <Block factor={1.25} offset={8}>
         <Dom className="bottom-left" position={[-canvasWidth / 2, -canvasHeight / 2, 0]}>
-          Culture is not your friend.
+          thank you, come again.
         </Dom>
       </Block>
     </>
-  )
+  );
+
+  // ------------------- //
 }
 
 function App() {
@@ -91,7 +121,7 @@ function App() {
   return (
     <>
       <Canvas className="canvas" concurrent pixelRatio={1} orthographic camera={{ zoom: state.zoom, position: [0, 0, 500] }}>
-        <Suspense fallback={<Dom center className="loading" children="Loading..." />}>
+        <Suspense fallback={<Dom center className="loading" children=". . ." />}>
           <Content />
           <Diamonds />
           <Startup />
@@ -103,16 +133,16 @@ function App() {
         ))}
       </div>
       <div className="frame">
-        <h1 className="frame__title">Scroll, Refraction and Shader Effects</h1>
+        <h1 className="frame__title">de·vel·op·er</h1>
         <div className="frame__links">
-          <a className="frame__link" href="http://tympanus.net/Tutorials/PhysicsMenu/">
-            Previous demo
+          <a className="frame__link" href="#">
+            projects
           </a>
-          <a className="frame__link" href="https://tympanus.net/codrops/?p=45441">
-            Article
+          <a className="frame__link" href="#">
+            about
           </a>
-          <a className="frame__link" href="https://github.com/drcmda/the-substance">
-            GitHub
+          <a className="frame__link" href="#">
+            contact
           </a>
         </div>
         <div className="frame__nav">

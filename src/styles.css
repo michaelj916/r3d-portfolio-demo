@@ -18,7 +18,8 @@
 body {
   margin: 0;
   padding: 0;
-  background: #0c0f13;
+  background-image: url('./img/noise.png') !important;
+  background-color: #000000;
   overflow: hidden;
   font-family: 'Sulphur Point', sans-serif;
   color: #8b8b8b;
@@ -44,7 +45,7 @@ a:hover {
 .loading {
   padding: 10px;
   transform: translate3d(-50%, -50%, 0);
-  color: #8b8b8b;
+  color: #b9f2ff;
 }
 
 .scrollArea {
